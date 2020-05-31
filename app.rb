@@ -89,14 +89,7 @@ class TimeTableApp < Roda
         r.post do
           @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
           if @params.success?
-            opts[:time_table_items].add_item(TimeTable.new(
-                                                            day: @params[:day],
-                                                            number_pair: @params[:number_pair],
-                                                            subject: @params[:subject],
-                                                            teacher: @params[:teacher],
-                                                            audience: @params[:audience],
-                                                            group: @params[:group]
-                                                          ))
+            opts[:time_table_items].add_item(@params)
             r.redirect '/timetable'
           else  
             view('add_new_item')

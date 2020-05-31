@@ -12,20 +12,20 @@
             <th>Номер пары</th>
             <th>Название предмета</th>
             <th>Имя преподавателя</th>
-            <th>Номер акдитории</th>
+            <th>Номер аудитории</th>
             <th>Название группы</th>
           </tr>
         </thead>
         <tbody>
           <% @time_table_items.each do |key,  item| %>
-            <tr>
+            <tr >
               <td><%= item.day%></td>
               <td><%= item.number_pair%></td>
               <td><%= item.subject%></td>
               <td><%= item.teacher%></td>
               <td><%= item.audience%></td>
               <td><%= item.group%></td>
-              <td><a class="button" href="/timetable/<%= item.id %>">Информация</a></td>
+              <td><a href="/timetable/<%= item.id %>">Информация</a></td>
             </tr>
           <% end %>
         </tbody>
