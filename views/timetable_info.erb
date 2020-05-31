@@ -1,0 +1,16 @@
+<div class="grid-x">
+  <div class="cell large-12">
+    <h3>Информация</h3>
+
+    <p>День недели: <%= @timetable.day %></p>
+    <p>Номер пары: <%= @timetable.number_pair %></p>
+    <p>Название предмета: <%= @timetable.subject%></p>
+    <p>Имя преподавателя: <%= @timetable.teacher %></p>
+    <p>Номер аудитории: <%= @timetable.audience %></p>
+    <p>Название группы: <%= @timetable.group %></p>
+
+    <a class="button" href="/timetable/<%= @timetable.id %>/edit">Редактировать</a>
+    <a class="button warning" href="/timetable/<%= @timetable.id %>/delete">Удалить</a>
+    <a class="button secondary" href="/timetable">Назад к списку книг</a>
+  </div>
+</div>

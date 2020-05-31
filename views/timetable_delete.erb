@@ -1,0 +1,25 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12 warning">
+    <h3>Вы действительно хотите удалить данный элемент?</h3>
+    <p>День недели: <%= @timetable.day %></p>
+    <p>Номер пары: <%= @timetable.number_pair %></p>
+    <p>Название предмета: <%= @timetable.subject%></p>
+    <p>Имя преподавателя: <%= @timetable.teacher %></p>
+    <p>Номер аудитории: <%= @timetable.audience %></p>
+    <p>Название группы: <%= @timetable.group %></p>
+  </div>
+</div>
+
+<% form({ method: :post },{ obj: @params }) do |f| %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-12 cell">
+      <%= f.input(:confirmation, type: :checkbox, label: 'Подтвержаю удаление') %>
+    </div>
+    <div class="large-12 cell">
+      <%= f.button(value: 'Удалить', class: 'button warning') %>
+      <a href="/timetable/<%= @timetable.id %>" class="button secondary">Отмена</a>
+    </div>
+  </div>
+<% end %>
+
+    

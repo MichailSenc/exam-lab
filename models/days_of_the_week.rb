@@ -9,7 +9,7 @@ module DaysWeek
 
     def self.all_days
         [
-            MONDAY, THURSDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+            MONDAY, TUESDAY , WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
         ]
     end
 end

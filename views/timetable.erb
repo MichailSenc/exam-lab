@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @time_table_items.each do |item| %>
+          <% @time_table_items.each do |key,  item| %>
             <tr>
               <td><%= item.day%></td>
               <td><%= item.number_pair%></td>
@@ -25,6 +25,7 @@
               <td><%= item.teacher%></td>
               <td><%= item.audience%></td>
               <td><%= item.group%></td>
+              <td><a class="button" href="/timetable/<%= item.id %>">Информация</a></td>
             </tr>
           <% end %>
         </tbody>

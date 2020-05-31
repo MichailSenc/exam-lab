@@ -11,5 +11,5 @@ NewSchema = Dry::Schema.Params do
   required(:subject).filled(SchemaTypes::StrippedString)
   required(:teacher).filled(SchemaTypes::StrippedString)
   required(:audience).filled(:integer, gteq?: 0)
-  required(:group).filled(SchemaTypes::StrippedString)
+  required(:group).filled(SchemaTypes::StrippedString)  
 end
