@@ -4,62 +4,42 @@ require 'forwardable'
 require_relative 'timetable'
 require 'csv'
 
-
-#Class of TimeTable list
+# Class of TimeTable list
 class TimeTableList
   include Enumerable
 
-  def initialize(file_name)
-    @timetable_list = read_data(file_name).map do |item|
+  def initialize(timetable_list = [])
+    @timetable_list = timetable_list.map do |item|
       [item.id, item]
     end.to_h
   end
 
-  def read_data(file_name)
-    list = []
-    id = 1.to_i
-    CSV.foreach(file_name, headers: true) do |row|
-      timetable_item = TimeTable.new(
-        id: id,
-        day: row['DAY'],
-        number_pair: row['NUMBER_PAIR'],
-        subject: row['SUBJECT'],
-        teacher: row['TEACHER'],
-        audience: row['AUDIENCE'],
-        group: row['GROUP']
-      )
-      id += 1
-      list.append(timetable_item)
-    end
-    list
-  end
-
   def data_by_day_of_week
-    hash = Hash.new { |hash, key| hash[key] = [] }
+    h = Hash.new { |hash, key| hash[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.day].append(elem)
     end
-    hash
-  end 
+    h
+  end
 
   def data_by_teachers
-    hash = Hash.new { |hash, key| hash[key] = [] }
+    h = Hash.new { |hash, key| hash[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.teacher].append(elem)
     end
-    hash
+    h
   end
 
   def data_by_groups
-    hash = Hash.new { |hash, key| hash[key] = [] }
+    h = Hash.new { |hash, key| hash[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.group].append(elem)
     end
-    hash
+    h
   end
 
   def all_items
-    @books.values
+    @timetable_list.values
   end
 
   def timetable_by_id(id)
@@ -80,6 +60,10 @@ class TimeTableList
     id
   end
 
+  def add_real_item(item)
+    @timetable_list[item.id] = item
+  end
+
   def update_item(id, params)
     timetable = @timetable_list[id]
     timetable.day = params[:day]
@@ -98,7 +82,7 @@ class TimeTableList
     new_array = list.sort do |a, b|
       a.audience_number.to_i <=> b.audience_number.to_i
     end
-    new_array 
+    new_array
   end
 
   def each
