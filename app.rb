@@ -97,7 +97,7 @@ class TimeTableApp < Roda
         r.post do
           # @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
           @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
-          pp validation_for_new_items.call(r.params).errors
+          # pp validation_for_new_items.call(r.params).errors
           if @params.success?
             opts[:time_table_items].add_item(@params)
             r.redirect '/timetable'

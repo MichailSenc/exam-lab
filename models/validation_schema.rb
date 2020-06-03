@@ -20,21 +20,26 @@ class ValidSchema < Dry::Validation::Contract
   end
 
   rule(:group, :day, :number_pair) do
-    pp timetable_list.group?(values[:group], values[:day], values[:number_pair])
-    key(:group).failure('fail_group') if timetable_list.group?(values[:group], values[:day], values[:number_pair])
-  end
-
-  rule(:teacher, :day, :number_pair) do
-    pp timetable_list.teacher?(values[:teacher], values[:day], values[:number_pair])
-    if timetable_list.teacher?(values[:teacher], values[:day], values[:number_pair])
-      key(:teacher).failure('fail_teacher')
+    errors = timetable_list.group?(values)
+    pp errors
+    errors.each do |error|
+      key(:group).failure(error)
     end
   end
 
-  rule(:audience, :day, :number_pair) do
-    pp timetable_list.audience?(values[:audience], values[:day], values[:number_pair])
-    if timetable_list.audience?(values[:audience], values[:day], values[:number_pair])
-      key(:audience).failure('fail_audience')
+  rule(:teacher, :day, :number_pair, :subject, :audience) do
+    errors = timetable_list.teacher?(values)
+    pp errors
+    errors.each do |error|
+      key(:teacher).failure(error)
+    end
+  end
+
+  rule(:audience, :day, :number_pair, :subject) do
+    errors = timetable_list.audience?(values)
+    pp errors
+    errors.each do |error|
+      key(:audience).failure(error)
     end
   end
 end

@@ -4,7 +4,7 @@
   :day: Среда
   :number_pair: 5
   :subject: programing
-  :teacher: michail
+  :teacher: valera
   :audience: 12
   :group: ivt-22
 - :id: 2
@@ -25,7 +25,7 @@
   :day: Пятница
   :number_pair: 1
   :subject: programing
-  :teacher: michail
+  :teacher: valera
   :audience: 220
   :group: ivt-21
 - :id: 5
@@ -39,7 +39,7 @@
   :day: Понедельник
   :number_pair: 1
   :subject: programing
-  :teacher: michail
+  :teacher: lexa
   :audience: 220
   :group: ivt-22
 - :id: 7
@@ -98,3 +98,17 @@
   :teacher: michail
   :audience: 220
   :group: ivt-22
+- :id: 15
+  :day: Вторник
+  :number_pair: 3
+  :subject: programing
+  :teacher: michail
+  :audience: 220
+  :group: ivt-22
+- :id: 16
+  :day: Вторник
+  :number_pair: 3
+  :subject: programing
+  :teacher: michail
+  :audience: 220
+  :group: ivt-20
