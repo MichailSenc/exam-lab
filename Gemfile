@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'dry-schema'
+gem 'dry-validation'
 gem 'forme'
 gem 'puma'
 gem 'roda'

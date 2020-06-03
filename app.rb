@@ -22,10 +22,14 @@ class TimeTableApp < Roda
 
   opts[:store] = Store.new
   opts[:time_table_items] = opts[:store].timetable
+  opts[:for_week] = {}
 
   status_handler(404) do
     view 'not_found'
   end
+
+  validation_for_new_items = ValidSchema.new(timetable_list: opts[:time_table_items])
+  for_week_validation = ForWeekSchema.new(timetable_list: opts[:time_table_items])
 
   route do |r|
     r.public if opts[:serve_static]
@@ -55,7 +59,8 @@ class TimeTableApp < Roda
           end
 
           r.post do
-            @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
+            # @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
+            @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
             if @params.success?
               opts[:time_table_items].update_item(@timetable.id, @params)
               r.redirect "/timetable/#{@timetable.id}"
@@ -90,7 +95,9 @@ class TimeTableApp < Roda
         end
 
         r.post do
-          @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
+          # @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
+          @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
+          pp validation_for_new_items.call(r.params).errors
           if @params.success?
             opts[:time_table_items].add_item(@params)
             r.redirect '/timetable'

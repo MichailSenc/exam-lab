@@ -1,0 +1,20 @@
+<div class="grid-x grid-margin-x">
+  <h3>Расписание за неделю</h3>
+
+  <div class="large-12 cell">
+    <% form({ method: :post }, { obj: @params }) do |f| %>
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 cell">
+            <%= f.input(:choice, type: :radioset, label: 'Выберите для кого нужно расписание', options: DaysWeek.timetable_items) %>
+          </div>
+          <div class="large-12 cell">
+            <%= f.input(:data, type: :text, label: 'Имя преподавателя/Номер аудитории/Название группы', placeholder: '220') %>
+          </div>
+          <div class="large-12 cell">
+            <%= f.button(value: 'Далее', class: 'button') %>
+            <a href='/timetable' class="button secondary">Отмена</a>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

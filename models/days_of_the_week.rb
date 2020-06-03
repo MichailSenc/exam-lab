@@ -15,4 +15,14 @@ module DaysWeek
       MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
     ]
   end
+
+  TEACHER = 'Преподаватель'
+  STUDENT = 'Группа'
+  AUDIENCE = 'Аудитория'
+
+  def self.timetable_items
+    [
+      TEACHER, STUDENT, AUDIENCE
+    ]
+  end
 end

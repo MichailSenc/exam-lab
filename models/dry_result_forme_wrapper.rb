@@ -16,6 +16,7 @@ class DryResultFormeAdapter < SimpleDelegator
     new_opts[:value] = @parameters[field]
     new_opts[:name] = field
     new_opts[:error] = @errors[field].join(', ') if @parameters.error?(field)
+    pp new_opts[:error]
 
     type = new_opts.delete(:type)
     if %i[checkbox radio].include?(type)

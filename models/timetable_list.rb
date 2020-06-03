@@ -15,27 +15,116 @@ class TimeTableList
   end
 
   def data_by_day_of_week
-    h = Hash.new { |hash, key| hash[key] = [] }
+    hash = Hash.new { |h, key| h[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.day].append(elem)
     end
-    h
+    hash
+  end
+
+  def group?(param_group, param_day, param_number_pair)
+    data = data_by_day_of_week[param_day]
+    data.each do |elem|
+      if elem.number_pair.eql?(param_number_pair) && elem.group.eql?(param_group)
+        pp elem
+        return true
+      end
+    end
+    false
+  end
+
+  def teacher?(param_teacher, param_day, param_number_pair)
+    data = data_by_day_of_week[param_day]
+    data.each do |elem|
+      if elem.number_pair.eql?(param_number_pair) && elem.teacher.eql?(param_teacher)
+        pp elem
+        return true
+      end
+    end
+    false
+  end
+
+  def audience?(param_audience, param_day, param_number_pair)
+    data = data_by_day_of_week[param_day]
+    data.each do |elem|
+      if elem.number_pair.eql?(param_number_pair) && elem.audience.eql?(param_audience)
+        pp elem
+        return true
+      end
+    end
+    false
+  end
+
+  def for_week?(_param_data, _param_choice)
+    false
+  end
+
+  def for_week_data(choice, data)
+    hash = {}
+    date = Hash.new { |h, key| h[key] = [] }
+    if choice.eql?('Преподаватель')
+      data_by_day_of_week.each do |_key, value|
+        value.each do |elem|
+          date[:elem.number_pair].append(elem) if elem.teacher.eql?(data)
+        end
+        hash[:key] = date
+      end
+    end
+    if choice.eql?('Группа')
+      data_by_day_of_week.each do |key, value|
+        value.each do |elem|
+          hash[key].append(elem) if elem.group.eql?(data)
+        end
+      end
+    end
+    if choice.eql?('Аудитория')
+      data_by_day_of_week.each do |key, value|
+        value.each do |elem|
+          hash[key].append(elem) if elem.audience.eql?(data)
+        end
+      end
+    end
+    hash
+  end
+
+  def all_teachers
+    array = []
+    @timetable_list.each_value do |value|
+      array.append(value.teacher)
+    end
+    array.uniq
+  end
+
+  def all_groups
+    array = []
+    @timetable_list.each_value do |value|
+      array.append(value.group)
+    end
+    array.uniq
+  end
+
+  def all_audiences
+    array = []
+    @timetable_list.each_value do |value|
+      array.append(value.audience)
+    end
+    array.uniq
   end
 
   def data_by_teachers
-    h = Hash.new { |hash, key| hash[key] = [] }
+    hash = Hash.new { |h, key| h[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.teacher].append(elem)
     end
-    h
+    hash
   end
 
   def data_by_groups
-    h = Hash.new { |hash, key| hash[key] = [] }
+    hash = Hash.new { |h, key| h[key] = [] }
     @timetable_list.each_value do |elem|
       hash[elem.group].append(elem)
     end
-    h
+    hash
   end
 
   def all_items
