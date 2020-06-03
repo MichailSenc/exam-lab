@@ -1,0 +1,24 @@
+<div class="grid-x grid-margin-x">
+    <% @filtered_items.each do |key, value| %>
+        <div class="card cell large-4">
+            <div class="card-divider">
+                <%= key %>
+            </div>
+            <% for i in 1..6 do %>
+                <div class="card-section">
+                    <p><strong><%= i %> пара:</strong></p>
+                    <% if !value[0][i] %>
+                        <p> <%= '----------'%> </p>
+                    <% else %>
+                        <p> <%= value[0][i] %> </p>
+                        <p>Группы: 
+                        <% value[1].each do |group|%>
+                            <%= group%>
+                        <% end %>
+                        </p>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>  

@@ -21,7 +21,7 @@ class ValidSchema < Dry::Validation::Contract
 
   rule(:group, :day, :number_pair) do
     errors = timetable_list.group?(values)
-    pp errors
+    # pp errors
     errors.each do |error|
       key(:group).failure(error)
     end
@@ -29,7 +29,7 @@ class ValidSchema < Dry::Validation::Contract
 
   rule(:teacher, :day, :number_pair, :subject, :audience) do
     errors = timetable_list.teacher?(values)
-    pp errors
+    # pp errors
     errors.each do |error|
       key(:teacher).failure(error)
     end
@@ -37,7 +37,7 @@ class ValidSchema < Dry::Validation::Contract
 
   rule(:audience, :day, :number_pair, :subject) do
     errors = timetable_list.audience?(values)
-    pp errors
+    # pp errors
     errors.each do |error|
       key(:audience).failure(error)
     end

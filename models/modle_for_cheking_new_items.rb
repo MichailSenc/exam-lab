@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# module adding methods for checking input data
+# module adding methods for checking input data. 1 and 3 tasks
 module DataChecking
   def group?(params)
     errors = []
@@ -8,7 +8,6 @@ module DataChecking
     data.each do |elem|
       if elem.number_pair.eql?(params[:number_pair]) && elem.group.eql?(params[:group])
         errors.concat(['В любой момент времени группа должна быть максимум на одном занятии'])
-        pp elem
       end
     end
     errors
@@ -21,11 +20,9 @@ module DataChecking
     data.each do |elem|
       if check_2(params, elem)
         errors.concat(['В любой момент времени преподаватель должен вести максимум один предмет'])
-        pp elem
       end
       if check_3(params, elem)
         errors.concat(['В любой момент времени преподаватель должен находиться максимум в одном месте'])
-        pp elem
       end
     end
     errors
@@ -37,7 +34,6 @@ module DataChecking
     data.each do |elem|
       if check_4(params, elem)
         errors.concat(['В любой момент времени в аудитории может преподаваться максимум один предмет'])
-        pp elem
       end
       if check_5(params, elem)
         errors.concat(['В любой момент времени в аудитории может находиться максимум одним преподаватель'])

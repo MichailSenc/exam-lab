@@ -11,10 +11,19 @@ class ForWeekSchema < Dry::Validation::Contract
 
   params do
     required(:data).filled(SchemaTypes::StrippedString)
-    required(:choice).filled(:string)
+    required(:choice).filled(SchemaTypes::StrippedString, included_in?: DaysWeek.timetable_items)
   end
 
   rule(:data, :choice) do
-    key(:data).failure('Incorrect data') if timetable_list.for_week?(values[:data], values[:choice])
+    case values[:choice]
+    when 'Преподаватель'
+      key(:data).failure('Данного преподавателя не существует') if timetable_list.for_week_teacher?(values[:data])
+    when 'Группа'
+      key(:data).failure('Данной группы не существует') if timetable_list.for_week_group?(values[:data])
+    when 'Аудитория'
+      key(:data).failure('Данной аудитории не существует') if timetable_list.for_week_audience?(values[:data])
+    else
+      key(:data).failure('Некорректные данные')
+    end
   end
 end

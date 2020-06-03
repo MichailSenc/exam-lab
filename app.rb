@@ -88,6 +88,19 @@ class TimeTableApp < Roda
         end
       end
 
+      r.on 'for_week' do
+        r.get do
+          @params = {}
+          view('forme_for_week')
+        end
+
+        r.post do
+          @params = DryResultFormeAdapter.new(for_week_validation.call(r.params))
+          @filtered_items = opts[:time_table_items].for_week_filter(r.params) if @params.success?
+          view('forme_for_week')
+        end
+      end
+
       r.on 'new' do
         r.get do
           @params = {}

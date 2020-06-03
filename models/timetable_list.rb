@@ -2,7 +2,9 @@
 
 require 'forwardable'
 require_relative 'timetable'
-require_relative 'input_validator_modle'
+require_relative 'modle_for_cheking_new_items'
+require_relative 'modle_for_week_time_table'
+require_relative 'days_of_the_week'
 require 'csv'
 
 # Class of TimeTable list
@@ -10,6 +12,7 @@ class TimeTableList
   attr_reader :number_teachers_subject
   include Enumerable
   include DataChecking
+  include ForWeekModule
 
   def initialize(timetable_list = [])
     @timetable_list = timetable_list.map do |item|
@@ -24,18 +27,6 @@ class TimeTableList
       hash[elem.day].append(elem)
     end
     hash
-  end
-
-  def for_week?(_param_data, _param_choice)
-    false
-  end
-
-  def all_teachers
-    array = []
-    @timetable_list.each_value do |value|
-      array.append(value.teacher)
-    end
-    array.uniq
   end
 
   def all_groups
