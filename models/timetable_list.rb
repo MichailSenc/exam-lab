@@ -25,7 +25,7 @@ class TimeTableList
 
   def data_by_day_of_week
     hash = Hash.new { |h, key| h[key] = [] }
-    DaysWeek.all_days.each {|day| hash[day]}
+    DaysWeek.all_days.each { |day| hash[day] }
     @timetable_list.each_value do |elem|
       hash[elem.day].append(elem)
     end
@@ -36,12 +36,11 @@ class TimeTableList
     hash = Hash.new do |h, key|
       h[key] = Hash.new { |hash1, key1| hash1[key1] = [] }
     end
-    DaysWeek.all_days.each {|day| hash[day]}
+    DaysWeek.all_days.each { |day| hash[day] }
     @timetable_list.each_value do |elem|
       hash[elem.day][elem.number_pair].append(elem)
     end
     hash
-    pp hash
   end
 
   def all_groups
