@@ -20,6 +20,8 @@ class TimeTableApp < Roda
     opts[:serve_static] = true
   end
 
+  require_relative 'routes/timetable.rb'
+
   opts[:store] = Store.new
   opts[:time_table_items] = opts[:store].timetable
   opts[:for_week] = {}
@@ -60,7 +62,6 @@ class TimeTableApp < Roda
           end
 
           r.post do
-            # @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
             @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
             if @params.success?
               opts[:time_table_items].update_item(@timetable.id, @params)
@@ -164,9 +165,7 @@ class TimeTableApp < Roda
         end
 
         r.post do
-          # @params = DryResultFormeAdapter.new(NewSchema.call(r.params))
           @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
-          # pp validation_for_new_items.call(r.params).errors
           if @params.success?
             opts[:time_table_items].add_item(@params)
             r.redirect '/timetable'
