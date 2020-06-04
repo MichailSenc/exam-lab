@@ -20,7 +20,7 @@ class ValidSchema < Dry::Validation::Contract
   end
 
   rule(:group, :day, :number_pair) do
-    errors = timetable_list.group?(values)
+    errors = timetable_list.new_group?(values)
     # pp errors
     errors.each do |error|
       key(:group).failure(error)
@@ -28,7 +28,7 @@ class ValidSchema < Dry::Validation::Contract
   end
 
   rule(:teacher, :day, :number_pair, :subject, :audience) do
-    errors = timetable_list.teacher?(values)
+    errors = timetable_list.new_teacher?(values)
     # pp errors
     errors.each do |error|
       key(:teacher).failure(error)
@@ -36,7 +36,7 @@ class ValidSchema < Dry::Validation::Contract
   end
 
   rule(:audience, :day, :number_pair, :subject) do
-    errors = timetable_list.audience?(values)
+    errors = timetable_list.new_audience?(values)
     # pp errors
     errors.each do |error|
       key(:audience).failure(error)

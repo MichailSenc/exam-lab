@@ -30,6 +30,7 @@ class TimeTableApp < Roda
 
   validation_for_new_items = ValidSchema.new(timetable_list: opts[:time_table_items])
   for_week_validation = ForWeekSchema.new(timetable_list: opts[:time_table_items])
+  retake_schema = RetakeSchema.new(timetable_list: opts[:time_table_items])
 
   route do |r|
     r.public if opts[:serve_static]
@@ -98,6 +99,25 @@ class TimeTableApp < Roda
           @params = DryResultFormeAdapter.new(for_week_validation.call(r.params))
           @filtered_items = opts[:time_table_items].for_week_filter(r.params) if @params.success?
           view('forme_for_week')
+        end
+      end
+
+      r.on 'retake' do
+        @teachers = opts[:time_table_items].all_teachers
+
+        r.get do
+          @params = {}
+          view('retake')
+        end
+
+        r.post do
+          @params = DryResultFormeAdapter.new(retake_schema.call(r.params))
+          if @params.success?
+            @retake_days = opts[:time_table_items].retake_days(r.params)
+            pp @retake_days
+          end
+          pp r.params 
+          view('retake')
         end
       end
 

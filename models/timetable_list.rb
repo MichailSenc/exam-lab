@@ -29,6 +29,22 @@ class TimeTableList
     hash
   end
 
+  def retake_days(params)
+    teacher = params['teacher']
+    groups = params['groups'].split(' ')
+    
+  end
+
+  def have_group?(param)
+    errors = []
+    all = all_groups  
+    groups = param.split(' ')
+    groups.each do |group|
+      errors.concat([group]) if !all.include?(group)
+    end
+    errors.uniq
+  end
+
   def all_groups
     array = []
     @timetable_list.each_value do |value|
@@ -37,10 +53,10 @@ class TimeTableList
     array.uniq
   end
 
-  def all_audiences
+  def all_teachers
     array = []
     @timetable_list.each_value do |value|
-      array.append(value.audience)
+      array.append(value.teacher)
     end
     array.uniq
   end

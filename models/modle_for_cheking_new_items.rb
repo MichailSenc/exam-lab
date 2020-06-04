@@ -2,7 +2,7 @@
 
 # module adding methods for checking input data. 1 and 3 tasks
 module DataChecking
-  def group?(params)
+  def new_group?(params)
     errors = []
     data = data_by_day_of_week[params[:day]]
     data.each do |elem|
@@ -13,7 +13,7 @@ module DataChecking
     errors
   end
 
-  def teacher?(params)
+  def new_teacher?(params)
     errors = []
     errors.concat(['Общее число предметов у преподавателя не должно превышать 8 штук']) if check_1(params)
     data = data_by_day_of_week[params[:day]]
@@ -28,7 +28,7 @@ module DataChecking
     errors
   end
 
-  def audience?(params)
+  def new_audience?(params)
     errors = []
     data = data_by_day_of_week[params[:day]]
     data.each do |elem|
@@ -37,7 +37,6 @@ module DataChecking
       end
       if check_5(params, elem)
         errors.concat(['В любой момент времени в аудитории может находиться максимум одним преподаватель'])
-
       end
     end
     errors
