@@ -16,7 +16,7 @@ class RetakeSchema < Dry::Validation::Contract
   end
 
   rule(:groups) do
-    errors = timetable_list.have_group?(values[:groups])
+    errors = timetable_list.groups?(values[:groups])
     errors[0] = "invalid groups: #{errors[0]}" if !errors.empty?
     errors.each do |error|
       key(:groups).failure(error)

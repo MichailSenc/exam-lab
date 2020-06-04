@@ -116,7 +116,7 @@ class TimeTableApp < Roda
             @retake_days = opts[:time_table_items].retake_days(r.params)
             pp @retake_days
           end
-          pp r.params 
+          pp r.params
           view('retake')
         end
       end

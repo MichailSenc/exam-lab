@@ -4,6 +4,7 @@ require 'forwardable'
 require_relative 'timetable'
 require_relative 'modle_for_cheking_new_items'
 require_relative 'modle_for_week_time_table'
+require_relative 'module_retake'
 require_relative 'days_of_the_week'
 require 'csv'
 
@@ -13,6 +14,7 @@ class TimeTableList
   include Enumerable
   include DataChecking
   include ForWeekModule
+  include RetakeModule
 
   def initialize(timetable_list = [])
     @timetable_list = timetable_list.map do |item|
@@ -23,26 +25,23 @@ class TimeTableList
 
   def data_by_day_of_week
     hash = Hash.new { |h, key| h[key] = [] }
+    DaysWeek.all_days.each {|day| hash[day]}
     @timetable_list.each_value do |elem|
       hash[elem.day].append(elem)
     end
     hash
   end
 
-  def retake_days(params)
-    teacher = params['teacher']
-    groups = params['groups'].split(' ')
-    
-  end
-
-  def have_group?(param)
-    errors = []
-    all = all_groups  
-    groups = param.split(' ')
-    groups.each do |group|
-      errors.concat([group]) if !all.include?(group)
+  def all_data
+    hash = Hash.new do |h, key|
+      h[key] = Hash.new { |hash1, key1| hash1[key1] = [] }
     end
-    errors.uniq
+    DaysWeek.all_days.each {|day| hash[day]}
+    @timetable_list.each_value do |elem|
+      hash[elem.day][elem.number_pair].append(elem)
+    end
+    hash
+    pp hash
   end
 
   def all_groups
@@ -59,22 +58,6 @@ class TimeTableList
       array.append(value.teacher)
     end
     array.uniq
-  end
-
-  def data_by_teachers
-    hash = Hash.new { |h, key| h[key] = [] }
-    @timetable_list.each_value do |elem|
-      hash[elem.teacher].append(elem)
-    end
-    hash
-  end
-
-  def data_by_groups
-    hash = Hash.new { |h, key| h[key] = [] }
-    @timetable_list.each_value do |elem|
-      hash[elem.group].append(elem)
-    end
-    hash
   end
 
   def all_items

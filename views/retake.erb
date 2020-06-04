@@ -17,4 +17,15 @@
         </div>
       <% end %>
   </div>
+
+  <div class="large-12 cell">
+    <h4>День для пересдачи</h4>
+    <% if @retake_days %>
+      <p>День недели: <%= @retake_days[0]%></p>    
+      <p>Пары: <%= @retake_days[1]%>,<%= @retake_days[2]%></p>    
+      <p>Аудитория: <%= @retake_days[3]%></p>    
+    <% else %>
+      <p>Дней для пересдачи нет.</p>
+    <% end %>
+  </div>
 </div>
