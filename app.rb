@@ -116,8 +116,44 @@ class TimeTableApp < Roda
             @retake_days = opts[:time_table_items].retake_days(r.params)
             pp @retake_days
           end
-          pp r.params
           view('retake')
+        end
+      end
+
+      r.on 'question' do
+        @teachers = opts[:time_table_items].all_teachers
+        @groups = opts[:time_table_items].all_groups
+
+        r.get do
+          @params = {}
+          view('question')
+        end
+
+        r.post do
+          @params = DryResultFormeAdapter.new(QuestionSchema.call(r.params))
+          if @params.success?
+            @question_days = opts[:time_table_items].question_days(r.params)
+            pp @question_days
+          end
+          view('question')
+        end
+      end
+
+      r.on 'load' do
+        @teachers = opts[:time_table_items].all_teachers
+        @params = {}
+
+        r.get do
+          view('load')
+        end
+
+        r.post do
+          @params = DryResultFormeAdapter.new(LoadSchema.call(r.params))
+          if @params.success?
+            @load = opts[:time_table_items].load(r.params)
+            pp @load
+          end
+          view('load')
         end
       end
 

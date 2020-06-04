@@ -2,9 +2,10 @@
 
 require 'forwardable'
 require_relative 'timetable'
-require_relative 'modle_for_cheking_new_items'
-require_relative 'modle_for_week_time_table'
+require_relative 'module_for_cheking_new_items'
+require_relative 'module_for_week_time_table'
 require_relative 'module_retake'
+require_relative 'module_load'
 require_relative 'days_of_the_week'
 require 'csv'
 
@@ -12,9 +13,10 @@ require 'csv'
 class TimeTableList
   attr_reader :number_teachers_subject
   include Enumerable
-  include DataChecking
+  include DataCheckingModule
   include ForWeekModule
   include RetakeModule
+  include LoadModule
 
   def initialize(timetable_list = [])
     @timetable_list = timetable_list.map do |item|
@@ -41,6 +43,10 @@ class TimeTableList
       hash[elem.day][elem.number_pair].append(elem)
     end
     hash
+  end
+
+  def question_days(_params)
+    true
   end
 
   def all_groups
@@ -104,12 +110,12 @@ class TimeTableList
 
   def sorted_by_number_of_audience
     array = all_data
-    array.delete_if {|key, value| value.empty?}
+    array.delete_if { |_key, value| value.empty? }
     array.each_value do |value|
       value.each_value do |item|
-        item.sort! { |a, b|  a.audience.to_i <=> b.audience.to_i }
-      end 
-    end 
+        item.sort! { |a, b| a.audience.to_i <=> b.audience.to_i }
+      end
+    end
     array
   end
 

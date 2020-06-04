@@ -1,0 +1,20 @@
+<div class="grid-x grid-margin-x">
+  <h3>Задать вопрос</h3>
+
+  <div class="large-12 cell">
+    <% form({ method: :post }, { obj: @params }) do |f| %>
+        <div class="grid-x grid-padding-x">
+          <div class="large-12 cell">
+            <%= f.input(:teacher, type: :select, label: 'Преподаватель', options: @teachers, add_blank: true) %>
+          </div>
+          <div class="large-12 cell">
+            <%= f.input(:group, type: :select, label: 'Группа', options: @groups, add_blank: true) %>
+          </div>
+          <div class="large-12 cell">
+            <%= f.button(value: 'Далее', class: 'button') %>
+            <a href='/timetable' class="button secondary">Вернутся к списку</a>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# the module contains functions for working with 'retake' data. 4 task
+# the module contains functions for working with 'retake' data. 6 task
 module RetakeModule
   def retake_days(params)
     data = all_data

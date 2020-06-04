@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# the module contains functions for working and checking data "per week". 4 task
+# the module contains functions to working and checking data "PER WEEK". 4 task
 module ForWeekModule
   def for_week_teacher?(teacher)
     @timetable_list.each_value do |value|

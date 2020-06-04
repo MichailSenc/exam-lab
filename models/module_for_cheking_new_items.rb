@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # module adding methods for checking input data. 1 and 3 tasks
-module DataChecking
+module DataCheckingModule
   def new_group?(params)
     errors = []
     data = data_by_day_of_week[params[:day]]
