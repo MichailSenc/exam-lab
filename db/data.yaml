@@ -1,12 +1,5 @@
 ---
 :timetable:
-- :id: 1
-  :day: Среда
-  :number_pair: 5
-  :subject: programing
-  :teacher: valera
-  :audience: 12
-  :group: ivt-22
 - :id: 2
   :day: Вторник
   :number_pair: 1
@@ -26,7 +19,7 @@
   :number_pair: 1
   :subject: programing
   :teacher: valera
-  :audience: 220
+  :audience: 12
   :group: ivt-21
 - :id: 5
   :day: Четверг
@@ -98,3 +91,10 @@
   :teacher: michail
   :audience: 220
   :group: ivt-20
+- :id: 17
+  :day: Понедельник
+  :number_pair: 1
+  :subject: обж
+  :teacher: valera
+  :audience: 12
+  :group: ivt-21

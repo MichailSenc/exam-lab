@@ -41,7 +41,7 @@ class TimeTableApp < Roda
 
     r.on 'timetable' do
       r.is do
-        @time_table_items = opts[:time_table_items]
+        @time_table_items = opts[:time_table_items].sorted_by_number_of_audience
         view('timetable')
       end
 

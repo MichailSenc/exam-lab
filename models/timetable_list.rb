@@ -102,11 +102,15 @@ class TimeTableList
     @number_teachers_subject[item.teacher].delete(item.subject) if item
   end
 
-  def sorted_by_number_of_audience(list)
-    new_array = list.sort do |a, b|
-      a.audience_number.to_i <=> b.audience_number.to_i
-    end
-    new_array
+  def sorted_by_number_of_audience
+    array = all_data
+    array.delete_if {|key, value| value.empty?}
+    array.each_value do |value|
+      value.each_value do |item|
+        item.sort! { |a, b|  a.audience.to_i <=> b.audience.to_i }
+      end 
+    end 
+    array
   end
 
   def each
