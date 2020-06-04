@@ -2,8 +2,8 @@
 
 require 'forwardable'
 require_relative 'timetable'
-require_relative 'module_for_cheking_new_items'
-require_relative 'module_for_week_time_table'
+require_relative 'module_new_items'
+require_relative 'module_for_week'
 require_relative 'module_retake'
 require_relative 'module_load'
 require_relative 'days_of_the_week'
