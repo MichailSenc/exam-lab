@@ -1,100 +1,205 @@
 ---
 :timetable:
+- :id: 1
+  :day: Понедельник
+  :number_pair: 1
+  :subject: Скриптовые языки программирования
+  :teacher: Васильев А.М.
+  :audience: 216
+  :group: ИВТ-22
 - :id: 2
-  :day: Вторник
-  :number_pair: 1
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
+  :day: Понедельник
+  :number_pair: 2
+  :subject: Скриптовые языки программирования
+  :teacher: Васильев А.М.
+  :audience: 216
+  :group: ИВТ-22
 - :id: 3
-  :day: Суббота
-  :number_pair: 1
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
+  :day: Понедельник
+  :number_pair: 2
+  :subject: Скриптовые языки программирования
+  :teacher: Васильев А.М.
+  :audience: 216
+  :group: ИВТ-21
 - :id: 4
-  :day: Пятница
-  :number_pair: 1
-  :subject: programing
-  :teacher: valera
-  :audience: 12
-  :group: ivt-21
-- :id: 5
-  :day: Четверг
-  :number_pair: 1
-  :subject: programing
-  :teacher: michail
+  :day: Понедельник
+  :number_pair: 3
+  :subject: Дифференциальные уравнения
+  :teacher: Глызин С.Д.
   :audience: 220
-  :group: ivt-22
+  :group: ИВТ-22
+- :id: 5
+  :day: Понедельник
+  :number_pair: 3
+  :subject: Дифференциальные уравнения
+  :teacher: Глызин С.Д.
+  :audience: 220
+  :group: ИВТ-21
 - :id: 6
   :day: Понедельник
-  :number_pair: 1
-  :subject: programing
-  :teacher: lexa
-  :audience: 220
-  :group: ivt-22
+  :number_pair: 4
+  :subject: Скриптовые языки программирования
+  :teacher: Васильев А.М.
+  :audience: 216
+  :group: ИВТ-21
 - :id: 7
   :day: Понедельник
-  :number_pair: 2
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-21
+  :number_pair: 4
+  :subject: Комплексный анализ
+  :teacher: Богомолов Ю.В.
+  :audience: 219
+  :group: ИВТ-22
 - :id: 8
   :day: Понедельник
-  :number_pair: 3
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-21
-- :id: 9
-  :day: Понедельник
-  :number_pair: 4
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
-- :id: 10
-  :day: Понедельник
   :number_pair: 5
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-21
-- :id: 11
-  :day: Понедельник
-  :number_pair: 6
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
-- :id: 14
+  :subject: Иностранный язык
+  :teacher: Мастакова Н.К.
+  :audience: 408
+  :group: ИВТ-22
+- :id: 9
   :day: Вторник
   :number_pair: 2
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
-- :id: 15
+  :subject: Комплексный анализ
+  :teacher: Шабаршина Г.В.
+  :audience: 215
+  :group: ИВТ-22
+- :id: 10
+  :day: Вторник
+  :number_pair: 2
+  :subject: Комплексный анализ
+  :teacher: Шабаршина Г.В.
+  :audience: 215
+  :group: ИВТ-21
+- :id: 11
   :day: Вторник
   :number_pair: 3
-  :subject: programing
-  :teacher: michail
-  :audience: 220
-  :group: ivt-22
-- :id: 16
+  :subject: Дифференциальные уравнения
+  :teacher: Толбей А.О.
+  :audience: 312
+  :group: ИВТ-21
+- :id: 12
+  :day: Вторник
+  :number_pair: 4
+  :subject: Дифференциальные уравнения
+  :teacher: Толбей А.О.
+  :audience: 312
+  :group: ИВТ-22
+- :id: 13
   :day: Вторник
   :number_pair: 3
-  :subject: programing
-  :teacher: michail
+  :subject: Функциональный анализ
+  :teacher: Бондаренко В.А.
   :audience: 220
-  :group: ivt-20
-- :id: 17
-  :day: Понедельник
+  :group: ИВТ-22
+- :id: 14
+  :day: Среда
   :number_pair: 1
-  :subject: обж
-  :teacher: valera
-  :audience: 12
-  :group: ivt-21
+  :subject: Скриптовые языки программирования
+  :teacher: Васильев А.М.
+  :audience: 213
+  :group: ИВТ-22
+- :id: 15
+  :day: Среда
+  :number_pair: 3
+  :subject: Языки и методы программирования
+  :teacher: Лагутина Н.С.
+  :audience: 412
+  :group: ИВТ-22
+- :id: 16
+  :day: Среда
+  :number_pair: 3
+  :subject: Языки и методы программирования
+  :teacher: Лагутина Н.С.
+  :audience: 412
+  :group: ИВТ-21
+- :id: 17
+  :day: Среда
+  :number_pair: 4
+  :subject: Практикум на ЭВМ по языкам программирования
+  :teacher: Лагутина Н.С.
+  :audience: 213
+  :group: ИВТ-22
+- :id: 18
+  :day: Среда
+  :number_pair: 5
+  :subject: Практикум на ЭВМ по языкам программирования
+  :teacher: Лагутина Н.С.
+  :audience: 213
+  :group: ИВТ-22
+- :id: 19
+  :day: Четверг
+  :number_pair: 1
+  :subject: Русский язык и культура речи
+  :teacher: Неронова И.В.
+  :audience: 220
+  :group: ИВТ-21
+- :id: 20
+  :day: Четверг
+  :number_pair: 2
+  :subject: Русский язык и культура речи
+  :teacher: Неронова И.В.
+  :audience: 226
+  :group: ИВТ-21
+- :id: 21
+  :day: Четверг
+  :number_pair: 4
+  :subject: Русский язык и культура речи
+  :teacher: Неронова И.В.
+  :audience: 226
+  :group: ИВТ-22
+- :id: 22
+  :day: Четверг
+  :number_pair: 2
+  :subject: Комплексный анализ
+  :teacher: Богомолов Ю.В.
+  :audience: 225
+  :group: ИВТ-22
+- :id: 23
+  :day: Четверг
+  :number_pair: 3
+  :subject: Физика
+  :teacher: Мазалецкий Л.А.
+  :audience: 225
+  :group: ИВТ-21
+- :id: 24
+  :day: Четверг
+  :number_pair: 4
+  :subject: с
+  :teacher: Мазалецкий Л.А.
+  :audience: 225
+  :group: ИВТ-21
+- :id: 25
+  :day: Пятница
+  :number_pair: 1
+  :subject: Комплексный анализ
+  :teacher: Богомолов Ю.В.
+  :audience: 304
+  :group: ИВТ-21
+- :id: 26
+  :day: Пятница
+  :number_pair: 2
+  :subject: Комплексный анализ
+  :teacher: Богомолов Ю.В.
+  :audience: 304
+  :group: ИВТ-21
+- :id: 27
+  :day: Пятница
+  :number_pair: 2
+  :subject: Физика
+  :teacher: Смирнова М.А.
+  :audience: 203
+  :group: ИВТ-22
+- :id: 28
+  :day: Пятница
+  :number_pair: 3
+  :subject: Физика
+  :teacher: Смирнова М.А.
+  :audience: 203
+  :group: ИВТ-22
+- :id: 29
+  :day: Пятница
+  :number_pair: 3
+  :subject: Функциональный анализ
+  :teacher: Бондаренко В.А.
+  :audience: 220
+  :group: ИВТ-22
