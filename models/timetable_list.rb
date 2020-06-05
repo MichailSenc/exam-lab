@@ -56,6 +56,14 @@ class TimeTableList
     true
   end
 
+  def all_teachers
+    array = []
+    @timetable_list.each_value do |value|
+      array.append(value.teacher)
+    end
+    array.uniq.sort
+  end
+
   def all_items
     @timetable_list.values
   end
