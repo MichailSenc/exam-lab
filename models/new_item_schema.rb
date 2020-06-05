@@ -7,7 +7,7 @@ require_relative 'schema_types'
 require_relative 'days_of_the_week'
 
 # validator to add new timetable item
-class ValidSchema < Dry::Validation::Contract
+class NewItemSchema < Dry::Validation::Contract
   option :timetable_list
 
   params do

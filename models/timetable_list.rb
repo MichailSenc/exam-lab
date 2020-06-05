@@ -7,10 +7,9 @@ require_relative 'module_retake'
 require_relative 'module_load'
 require_relative 'days_of_the_week'
 
-
 # Class of TimeTable list
 class TimeTableList
-  attr_reader :number_teachers_subject
+  attr_reader :timetable_list
   include Enumerable
   include DataCheckingModule
   include ForWeekModule
@@ -21,7 +20,6 @@ class TimeTableList
     @timetable_list = timetable_list.map do |item|
       [item.id, item]
     end.to_h
-    @number_teachers_subject = Hash.new { |h, key| h[key] = [] }
   end
 
   def data_by_day_of_week
@@ -44,24 +42,18 @@ class TimeTableList
     hash
   end
 
+  def move?(params)
+    data = data_by_day_of_week[params[:day]]
+    data.each do |elem|
+      return true if elem.day.eql?(params[:day]) &&
+                     elem.number_pair.eql?(params[:number_pair]) &&
+                     elem.audience.eql?(params[:audience])
+    end
+    false
+  end
+
   def question_days(_params)
     true
-  end
-
-  def all_groups
-    array = []
-    @timetable_list.each_value do |value|
-      array.append(value.group)
-    end
-    array.uniq
-  end
-
-  def all_teachers
-    array = []
-    @timetable_list.each_value do |value|
-      array.append(value.teacher)
-    end
-    array.uniq
   end
 
   def all_items
@@ -83,28 +75,22 @@ class TimeTableList
       audience: params[:audience],
       group: params[:group]
     )
-    @number_teachers_subject[params[:teacher]].append(params[:subject])
     id
   end
 
   def add_real_item(item)
     @timetable_list[item.id] = item
-    @number_teachers_subject[item.teacher].append(item.subject)
   end
 
-  def update_item(id, params)
+  def move_item(id, params)
     timetable = @timetable_list[id]
     timetable.day = params[:day]
     timetable.number_pair = params[:number_pair]
-    timetable.subject = params[:subject]
-    timetable.teacher = params[:teacher]
     timetable.audience = params[:audience]
-    timetable.group = params[:group]
   end
 
   def delete_item(id)
-    item = @timetable_list.delete(id)
-    @number_teachers_subject[item.teacher].delete(item.subject) if item
+    @timetable_list.delete(id)
   end
 
   def sorted_by_number_of_audience

@@ -19,12 +19,10 @@
   </div>
 
   <div class="large-12 cell">
-
     <% if {}.eql?(@params) %>   
-
     <% elsif @params.success? %>
       <h4>Расписание за неделю</h4>
-      <%= render('_for_week_timetable') %>
+      <%= render('_for_week_forme') %>
     <% end %>
   </div>
 </div>

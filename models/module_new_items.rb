@@ -42,9 +42,17 @@ module DataCheckingModule
     errors
   end
 
+  def number_teacher_subj(teacher)
+    subj = []
+    @timetable_list.each_value do |value|
+      subj.append(value.subject) if value.teacher.eql?(teacher)
+    end
+    subj.uniq
+  end
+
   def check_1(params)
-    !@number_teachers_subject.include?(params[:subject]) &&
-      @number_teachers_subject.uniq.length >= 8
+    subj = number_teacher_subj(params[:teacher])
+    !subj.include?(params[:subject]) && subj.length >= 8
   end
 
   def check_2(params, elem)

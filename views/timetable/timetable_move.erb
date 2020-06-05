@@ -1,0 +1,22 @@
+<div class="grid-x grid-margin-x">
+  <h3>Редактирование</h3>
+  <div class="large-12 cell">
+    <% form({ method: :post }, { obj: @params }) do |f| %>
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <%= f.input(:day, type: :select, label: 'День недели', options: DaysWeek.all_days, add_blank: true) %>
+        </div>
+        <div class="large-12 cell">
+          <%= f.input(:number_pair, type: :radioset, label: 'Номер пары', options: 1.upto(6).to_a) %>
+        </div>
+        <div class="large-12 cell">
+          <%= f.input(:audience, type: :text, label: 'Номер аyдитории	', placeholder: '220') %>
+        </div>
+        <div class="large-12 cell">
+          <%= f.button(value: 'Изменить', class: 'button') %>
+          <a href="<%= "/timetable/#{@timetable.id}" %>" class="button secondary">Отмена</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

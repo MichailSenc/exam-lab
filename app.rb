@@ -24,156 +24,17 @@ class TimeTableApp < Roda
 
   opts[:store] = Store.new
   opts[:time_table_items] = opts[:store].timetable
-  opts[:for_week] = {}
 
   status_handler(404) do
     view 'not_found'
   end
 
-  validation_for_new_items = ValidSchema.new(timetable_list: opts[:time_table_items])
-  for_week_validation = ForWeekSchema.new(timetable_list: opts[:time_table_items])
-  retake_schema = RetakeSchema.new(timetable_list: opts[:time_table_items])
-
   route do |r|
     r.public if opts[:serve_static]
+    r.hash_branches
 
     r.root do
       r.redirect '/timetable'
-    end
-
-    r.on 'timetable' do
-      r.is do
-        @time_table_items = opts[:time_table_items].sorted_by_number_of_audience
-        view('timetable')
-      end
-
-      r.on Integer do |id|
-        @timetable = opts[:time_table_items].timetable_by_id(id)
-        next if @timetable.nil?
-
-        r.is do
-          view('timetable_info')
-        end
-
-        r.on 'edit' do
-          r.get do
-            @params = @timetable.to_h
-            view('timetable_edit')
-          end
-
-          r.post do
-            @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
-            if @params.success?
-              opts[:time_table_items].update_item(@timetable.id, @params)
-              r.redirect "/timetable/#{@timetable.id}"
-            else
-              view('timetable_edit')
-            end
-          end
-        end
-
-        r.on 'delete' do
-          r.get do
-            @params = {}
-            view('timetable_delete')
-          end
-
-          r.post do
-            @params = DryResultFormeAdapter.new(DeleteSchema.call(r.params))
-            if @params.success?
-              opts[:time_table_items].delete_item(@timetable.id)
-              r.redirect('/timetable')
-            else
-              view('timetable_delete')
-            end
-          end
-        end
-      end
-
-      r.on 'for_week' do
-        r.get do
-          @params = {}
-          view('forme_for_week')
-        end
-
-        r.post do
-          @params = DryResultFormeAdapter.new(for_week_validation.call(r.params))
-          @filtered_items = opts[:time_table_items].for_week_filter(r.params) if @params.success?
-          view('forme_for_week')
-        end
-      end
-
-      r.on 'retake' do
-        @teachers = opts[:time_table_items].all_teachers
-
-        r.get do
-          @params = {}
-          view('retake')
-        end
-
-        r.post do
-          @params = DryResultFormeAdapter.new(retake_schema.call(r.params))
-          if @params.success?
-            @retake_days = opts[:time_table_items].retake_days(r.params)
-            pp @retake_days
-          end
-          view('retake')
-        end
-      end
-
-      r.on 'question' do
-        @teachers = opts[:time_table_items].all_teachers
-        @groups = opts[:time_table_items].all_groups
-
-        r.get do
-          @params = {}
-          view('question')
-        end
-
-        r.post do
-          @params = DryResultFormeAdapter.new(QuestionSchema.call(r.params))
-          if @params.success?
-            @question_days = opts[:time_table_items].question_days(r.params)
-            pp @question_days
-          end
-          view('question')
-        end
-      end
-
-      r.on 'load' do
-        @teachers = opts[:time_table_items].all_teachers
-        @params = {}
-
-        r.get do
-          view('load')
-        end
-
-        r.post do
-          @params = DryResultFormeAdapter.new(LoadSchema.call(r.params))
-          if @params.success?
-            @load = opts[:time_table_items].load(r.params)
-            pp @load
-          end
-          view('load')
-        end
-      end
-
-      r.on 'new' do
-        r.get do
-          @params = {}
-          view('add_new_item')
-        end
-
-        r.post do
-          @params = DryResultFormeAdapter.new(validation_for_new_items.call(r.params))
-          if @params.success?
-            opts[:time_table_items].add_item(@params)
-            r.redirect '/timetable'
-          else
-            view('add_new_item')
-          end
-        end
-      end
     end
   end
 end
