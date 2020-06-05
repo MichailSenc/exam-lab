@@ -2,36 +2,39 @@
 
 # the module contains functions to working and checking data "PER WEEK". 4 task
 module ForWeekModule
-  def for_week_teacher?(teacher)
+  def all_groups
+    array = []
     @timetable_list.each_value do |value|
-      return false if value.teacher.eql?(teacher)
+      array.append(value.group)
     end
-    true
+    array.uniq.sort
   end
 
-  def for_week_group?(group)
+  def all_teachers
+    array = []
     @timetable_list.each_value do |value|
-      return false if value.group.eql?(group)
+      array.append(value.teacher)
     end
-    true
+    array.uniq.sort
   end
 
-  def for_week_audience?(audience)
+  def all_audience
+    array = []
     @timetable_list.each_value do |value|
-      return false if value.audience.to_i == audience.to_i
+      array.append(value.audience)
     end
-    true
+    array.uniq.sort
   end
 
   def for_week_filter(params)
     filtered_hash = {}
     case params['choice']
     when 'Преподаватель'
-      filtered_hash = filter_by_teacher(params['data'].strip)
+      filtered_hash = filter_by_teacher(params['teacher'].strip)
     when 'Группа'
-      filtered_hash = filter_by_group(params['data'].strip)
+      filtered_hash = filter_by_group(params['group'].strip)
     when 'Аудитория'
-      filtered_hash = filter_by_audience(params['data'].strip)
+      filtered_hash = filter_by_audience(params['audience'].strip)
     end
     filtered_hash
   end

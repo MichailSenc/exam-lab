@@ -108,12 +108,4 @@ module RetakeModule
     end
     errors.uniq
   end
-
-  def all_groups
-    array = []
-    @timetable_list.each_value do |value|
-      array.append(value.group)
-    end
-    array.uniq.sort
-  end
 end

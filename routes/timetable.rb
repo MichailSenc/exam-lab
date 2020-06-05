@@ -81,6 +81,10 @@ class TimeTableApp
     end
 
     r.on 'for_week' do
+      @teachers = opts[:time_table_items].all_teachers
+      @groups = opts[:time_table_items].all_groups
+      @audience = opts[:time_table_items].all_audience
+
       r.get do
         @params = {}
         view('for_week')

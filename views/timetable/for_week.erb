@@ -8,7 +8,13 @@
             <%= f.input(:choice, type: :radioset, label: 'Выберите для кого нужно расписание', options: DaysWeek.timetable_items) %>
           </div>
           <div class="large-12 cell">
-            <%= f.input(:data, type: :text, label: 'Имя преподавателя/Номер аудитории/Название группы', placeholder: '220') %>
+            <%= f.input(:teacher, type: :select, label: 'Преподаватель', options: @teachers, add_blank: true) %>
+          </div>
+          <div class="large-12 cell">
+            <%= f.input(:group, type: :select, label: 'Группа', options: @groups, add_blank: true) %>
+          </div>  
+          <div class="large-12 cell">
+            <%= f.input(:audience, type: :select, label: 'Аудитория', options: @audience, add_blank: true) %>
           </div>
           <div class="large-12 cell">
             <%= f.button(value: 'Далее', class: 'button') %>
