@@ -65,7 +65,13 @@ class TimeTableList
   end
 
   def add_item(params)
-    id = @timetable_list.keys.max + 1
+    if @timetable_list.empty?
+      
+    else
+      
+    end
+    id = 1
+    id = @timetable_list.keys.max + 1 if !@timetable_list.empty?
     @timetable_list[id] = TimeTable.new(
       id: id,
       day: params[:day],
