@@ -124,6 +124,7 @@ class TimeTableApp
       r.post do
         @params = DryResultFormeAdapter.new(QuestionSchema.call(r.params))
         @question_days = opts[:time_table_items].question_days(r.params) if @params.success?
+        pp @question_days
         view('question')
       end
     end

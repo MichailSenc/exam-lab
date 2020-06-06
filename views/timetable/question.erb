@@ -17,4 +17,25 @@
       </div>
     <% end %>
   </div>
+
+  <div class="large-12 cell">
+    <div class="card cell large-4">
+      <div class="card-divider">
+          <strong>Дни для вопрсов</strong>
+      </div>
+      <div class="card-section">
+        <% if @question_days %>
+          <% if @question_days.empty? %>
+            <p>Задать вопрос невозможно.</p>
+          <% else %>
+            <% @question_days.each do |item| %>
+              <p><%= item[0]%>, <%= item[1]%> пара</p>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p>Задать вопрос невозможно.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

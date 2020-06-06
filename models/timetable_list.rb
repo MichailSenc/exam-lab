@@ -52,16 +52,36 @@ class TimeTableList
     false
   end
 
-  def question_days(_params)
-    data = data_by_day_of_week
-    true
+  def question_days(param)
+    data = all_data
+    date_array = []
+    data.each do |day, pairs|
+      (1..6).each do |i|
+        if !pairs.key?(i)
+          date_array.append([day, i])
+          next
+        end
+        if !teacher_is_present(param['teacher'], pairs[i]) && !group_is_present(param['group'], pairs[i])
+          date_array.append([day, i])
+        end
+      end
+    end
+    date_array
   end
 
-  def question_by_teacher(teacher, data)
-    date_array = []
-    data.each do |item|
-      date_array.append([item.day, item.number_pair]) if item.teacher.eql?(teacher)
+  def teacher_is_present(teacher, items)
+    items.each do |item|
+      pp item
+      return true if item.teacher.eql?(teacher)
     end
+    false
+  end
+
+  def group_is_present(group, items)
+    items.each do |item|
+      return true if item.group.eql?(group)
+    end
+    false
   end
 
   def all_items
