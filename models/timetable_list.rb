@@ -66,9 +66,7 @@ class TimeTableList
 
   def add_item(params)
     if @timetable_list.empty?
-      
-    else
-      
+
     end
     id = 1
     id = @timetable_list.keys.max + 1 if !@timetable_list.empty?

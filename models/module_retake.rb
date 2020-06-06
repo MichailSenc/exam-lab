@@ -4,14 +4,11 @@
 module RetakeModule
   def retake_days(params)
     data = all_data
-    teacher = params['teacher']
-    groups = params['groups'].split(' ')
-
-    retake = retake_by_teacher(teacher, data) & retake_by_groups(groups, data)
-    return nil if retake.empty?
+    retake = retake_by_teacher(params['teacher'].downcase, data) &
+             retake_by_groups(params['groups'].downcase.split(' '), data)
 
     retake.each do |day|
-      auditory = retake_by_audience(day, data, teacher)
+      auditory = retake_by_audience(day, data, params['teacher'].downcase)
       return day.append(auditory[0]) if !auditory.empty?
     end
     nil
@@ -33,15 +30,15 @@ module RetakeModule
     days
   end
 
-  def check_for_teacher(day, teacher, count)
-    if day.key?(count)
-      day[count].each do |item|
-        return true if item.teacher.eql?(teacher)
+  def check_for_teacher(day, teacher, pair)
+    if day.key?(pair)
+      day[pair].each do |item|
+        return true if item.teacher.downcase.eql?(teacher)
       end
     end
-    if day.key?(count + 1)
-      day[count].each do |item|
-        return true if item.teacher.eql?(teacher)
+    if day.key?(pair + 1)
+      day[pair].each do |item|
+        return true if item.teacher.downcase.eql?(teacher)
       end
     end
     false
@@ -64,7 +61,7 @@ module RetakeModule
   def all_audience_by_teacher(teacher)
     array = []
     @timetable_list.each_value do |value|
-      array.append(value.audience) if value.teacher.eql?(teacher)
+      array.append(value.audience) if value.teacher.downcase.eql?(teacher)
     end
     array.uniq
   end
@@ -83,17 +80,17 @@ module RetakeModule
       end
     end
     days
-  end
+    end
 
-  def check_for_groups(day, groups, count)
-    if day.key?(count)
-      day[count].each do |item|
-        return true if groups.map { |group| item.group.eql?(group) }.include?(true)
+  def check_for_groups(day, groups, pair)
+    if day.key?(pair)
+      day[pair].each do |item|      
+        return true if groups.map { |group| item.group.downcase.eql?(group) }.include?(true)
       end
     end
-    if day.key?(count + 1)
-      day[count].each do |item|
-        return true if groups.map { |group| item.group.eql?(group) }.include?(true)
+    if day.key?(pair + 1)
+      day[pair + 1].each do |item|
+        return true if groups.map { |group| item.group.downcase.eql?(group) }.include?(true)
       end
     end
     false
@@ -101,8 +98,8 @@ module RetakeModule
 
   def groups?(param)
     errors = []
-    all = all_groups
-    groups = param.split(' ')
+    all = all_groups.map {|elem| elem.downcase}
+    groups = param.downcase.split(' ')
     groups.each do |group|
       errors.concat([group]) if !all.include?(group)
     end

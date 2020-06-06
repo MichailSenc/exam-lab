@@ -2,5 +2,31 @@
   <h3>Добавление нового элемента</h3>
 </div>
 
-<%= render('_timetable_form', locals: {form_type: 'Добавить', back_location: '/timetable'}) %>
-    
+<div class="large-12 cell">
+  <% form({ method: :post }, { obj: @params }) do |f| %>
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell">
+        <%= f.input(:day, type: :select, label: 'День недели', options: DaysWeek.all_days, add_blank: true) %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.input(:number_pair, type: :radioset, label: 'Номер пары', options: 1.upto(6).to_a) %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.input(:subject, type: :text, label: 'Название предмета', placeholder: 'Программирование') %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.input(:teacher, type: :text, label: 'Имя преподавателя	', placeholder: 'Андрей Валерьевич') %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.input(:audience, type: :text, label: 'Номер аудитории	', placeholder: '220') %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.input(:group, type: :text, label: 'Название группы', placeholder: 'ИВТ-22') %>
+      </div>
+      <div class="large-12 cell">
+        <%= f.button(value: 'Добавить', class: 'button') %>
+        <a href="<%= '/timetable' %>" class="button secondary">Отмена</a>
+      </div>
+    </div>
+  <% end %>
+</div>

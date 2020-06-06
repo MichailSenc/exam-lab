@@ -24,6 +24,7 @@ class Store
     yaml_data = File.read(DATA_STORE)
     raw_data = Psych.load(yaml_data, symbolize_names: true)
     return if !raw_data
+
     raw_data[:timetable].each do |raw_item|
       item = TimeTable.new(**raw_item)
       @timetable.add_real_item(item)

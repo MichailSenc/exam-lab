@@ -3,29 +3,35 @@
 
   <div class="large-12 cell">
     <% form({ method: :post }, { obj: @params }) do |f| %>
-        <div class="grid-x grid-padding-x">
-          <div class="large-12 cell">
-            <%= f.input(:teacher, type: :select, label: 'Преподаватель', options: @teachers, add_blank: true) %>
-          </div>
-          <div class="large-12 cell">
-            <%= f.input(:groups, type: :text, label: 'Введите через пробел необходимые группы', placeholder: 'ИВТ-21 ИВТ-22') %>
-          </div>
-          <div class="large-12 cell">
-            <%= f.button(value: 'Далее', class: 'button') %>
-            <a href='/timetable' class="button secondary">Вернутся к списку</a>
-          </div>
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell">
+          <%= f.input(:teacher, type: :select, label: 'Преподаватель', options: @teachers, add_blank: true) %>
         </div>
-      <% end %>
+        <div class="large-12 cell">
+          <%= f.input(:groups, type: :text, label: 'Введите через пробел необходимые группы', placeholder: 'ИВТ-21 ИВТ-22') %>
+        </div>
+        <div class="large-12 cell">
+          <%= f.button(value: 'Далее', class: 'button') %>
+          <a href='/timetable' class="button secondary">Вернутся к списку</a>
+        </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="large-12 cell">
-    <h4>День для пересдачи</h4>
-    <% if @retake_days %>
-      <p>День недели: <%= @retake_days[0]%></p>    
-      <p>Пары: <%= @retake_days[1]%>,<%= @retake_days[2]%></p>    
-      <p>Аудитория: <%= @retake_days[3]%></p>    
-    <% else %>
-      <p>Дней для пересдачи нет.</p>
-    <% end %>
+    <div class="card cell large-4">
+      <div class="card-divider">
+          <strong>День для пересдачи</strong>
+      </div>
+      <div class="card-section">
+        <% if @retake_days %>
+          <p>День недели: <%= @retake_days[0]%></p>    
+          <p>Пары: <%= @retake_days[1]%>,<%= @retake_days[2]%></p>    
+          <p>Аудитория: <%= @retake_days[3]%></p>    
+        <% else %>
+          <p>Дней для пересдачи нет.</p>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
