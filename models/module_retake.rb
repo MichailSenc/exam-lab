@@ -80,17 +80,17 @@ module RetakeModule
       end
     end
     days
-    end
+  end
 
   def check_for_groups(day, groups, pair)
     if day.key?(pair)
-      day[pair].each do |item|      
-        return true if groups.map { |group| item.group.downcase.eql?(group) }.include?(true)
+      day[pair].each do |item|
+        return true if groups.include?(item.group.downcase)
       end
     end
     if day.key?(pair + 1)
       day[pair + 1].each do |item|
-        return true if groups.map { |group| item.group.downcase.eql?(group) }.include?(true)
+        return true if groups.include?(item.group.downcase)
       end
     end
     false
@@ -98,7 +98,7 @@ module RetakeModule
 
   def groups?(param)
     errors = []
-    all = all_groups.map {|elem| elem.downcase}
+    all = all_groups.map(&:downcase)
     groups = param.downcase.split(' ')
     groups.each do |group|
       errors.concat([group]) if !all.include?(group)

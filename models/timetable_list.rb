@@ -53,7 +53,15 @@ class TimeTableList
   end
 
   def question_days(_params)
+    data = data_by_day_of_week
     true
+  end
+
+  def question_by_teacher(teacher, data)
+    date_array = []
+    data.each do |item|
+      date_array.append([item.day, item.number_pair]) if item.teacher.eql?(teacher)
+    end
   end
 
   def all_items
