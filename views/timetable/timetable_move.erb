@@ -13,6 +13,12 @@
           <%= f.input(:audience, type: :text, label: 'Номер аyдитории	', placeholder: '220') %>
         </div>
         <div class="large-12 cell">
+          <%= f.input(:teacher, type: :hidden, value: @timetable.teacher) %>
+        </div>
+        <div class="large-12 cell">
+          <%= f.input(:group, type: :hidden, value: @timetable.group) %>
+        </div>
+        <div class="large-12 cell">
           <%= f.button(value: 'Изменить', class: 'button') %>
           <a href="<%= "/timetable/#{@timetable.id}" %>" class="button secondary">Отмена</a>
         </div>

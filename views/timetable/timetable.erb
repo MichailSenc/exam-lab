@@ -17,8 +17,9 @@
       </thead>
       <tbody>
         <% @time_table_items.each do |key,  hash_of_pair| %>
-          <% hash_of_pair.each_value do |items| %>
-            <% items.each do |item| %>
+          <% (1..6).each do |i| %>
+            <% next if !hash_of_pair.key?(i)%>
+            <% hash_of_pair[i].each do |item| %>
               <tr >
                 <td><%= item.day%></td>
                 <td><%= item.number_pair%></td>

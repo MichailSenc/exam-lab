@@ -8,6 +8,7 @@ class TimeTableApp
 
     r.is do
       @time_table_items = opts[:time_table_items].sorted_by_number_of_audience
+      pp @time_table_items
       view('timetable')
     end
 
@@ -27,7 +28,7 @@ class TimeTableApp
         end
 
         r.post do
-          @params = DryResultFormeAdapter.new(MoveSchema.new(timetable_list: opts[:time_table_items]).call(r.params), ob: @timetable)
+          @params = DryResultFormeAdapter.new(MoveSchema.new(timetable_list: opts[:time_table_items]).call(r.params))
           if @params.success?
             opts[:time_table_items].move_item(@timetable.id, @params)
             r.redirect "/timetable/#{@timetable.id}"

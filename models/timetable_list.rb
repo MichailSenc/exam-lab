@@ -49,27 +49,18 @@ class TimeTableList
     data.each do |elem|
       return true if elem.day.eql?(params[:day]) &&
                      elem.number_pair.eql?(params[:number_pair]) &&
-                     elem.audience.eql?(params[:audience])
+                     elem.audience.eql?(params[:audience]) &&
+                     !elem.teacher.eql?(params[:teacher])
     end
     false
   end
 
-  def move_pair?(params, group)
-    data = all_data[params[:day]]
-    return false if !data.key?(params[:number_pair])
-
-    data[params[:number_pair]].each do |elem|
-      return true if elem.group.eql?(group)
-    end
-    false
-  end
-
-  def move_subj?(params, subject)
-    data = all_data[params[:day]]
-    return false if !data.key?(params[:number_pair])
-
-    data[params[:number_pair]].each do |elem|
-      return true if elem.subject.eql?(subject)
+  def move_pair?(params)
+    data = data_by_day_of_week[params[:day]]
+    data.each do |elem|
+      return true if elem.day.eql?(params[:day]) &&
+                     elem.number_pair.eql?(params[:number_pair]) &&
+                     elem.group.eql?(params[:group])
     end
     false
   end
@@ -82,21 +73,13 @@ class TimeTableList
     @timetable_list[id]
   end
 
-  def add_item(params)
-    if @timetable_list.empty?
-
-    end
-    id = 1
-    id = @timetable_list.keys.max + 1 if !@timetable_list.empty?
-    @timetable_list[id] = TimeTable.new(
-      id: id,
-      day: params[:day],
-      number_pair: params[:number_pair],
-      subject: params[:subject],
-      teacher: params[:teacher],
-      audience: params[:audience],
-      group: params[:group]
-    )
+  def add_item(_params)
+    id = if @timetable_list.empty?
+           1
+         else
+           @timetable_list.keys.max + 1
+         end
+    @timetable_list[id] = TimeTable.new(id: id, **parameters.to_h)
     id
   end
 
