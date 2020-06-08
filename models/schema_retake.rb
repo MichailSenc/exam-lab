@@ -22,4 +22,10 @@ class RetakeSchema < Dry::Validation::Contract
       key(:groups).failure(error)
     end
   end
+
+  rule(:teacher) do
+    if !timetable_list.all_teachers.include?(values[:teacher])
+      key(:teacher).failure('Данного преподавателя не существует.')
+    end
+  end
 end

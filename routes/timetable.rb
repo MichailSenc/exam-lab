@@ -2,14 +2,6 @@
 
 # routes timetable
 class TimeTableApp
-  path TimeTable do |item, action|
-    if action
-      "/cool_books/#{item.id}/#{action}"
-    else
-      "/cool_books/#{item.id}"
-    end
-  end
-
   hash_branch('timetable') do |r|
     append_view_subdir('timetable')
     set_layout_options(template: '../views/layout')
@@ -35,7 +27,7 @@ class TimeTableApp
         end
 
         r.post do
-          @params = DryResultFormeAdapter.new(MoveSchema.new(timetable_list: opts[:time_table_items]).call(r.params))
+          @params = DryResultFormeAdapter.new(MoveSchema.new(timetable_list: opts[:time_table_items]).call(r.params), ob: @timetable)
           if @params.success?
             opts[:time_table_items].move_item(@timetable.id, @params)
             r.redirect "/timetable/#{@timetable.id}"

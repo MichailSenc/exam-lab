@@ -52,7 +52,7 @@ module DataCheckingModule
 
   def check_1(params)
     subj = number_teacher_subj(params[:teacher])
-    !subj.include?(params[:subject]) && subj.length >= 8
+    !subj.include?(params[:subject]) && subj.length >= 7
   end
 
   def check_2(params, elem)

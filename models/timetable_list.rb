@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require_relative 'timetable'
-require_relative 'module_new_items'
-require_relative 'module_for_week'
-require_relative 'module_retake'
-require_relative 'module_load'
+require_relative 'timetable_module_new_items'
+require_relative 'timetable_module_for_week'
+require_relative 'timetable_module_retake'
+require_relative 'timetable_module_load'
+require_relative 'timetable_module_question'
 require_relative 'days_of_the_week'
 
 # Class of TimeTable list
@@ -13,8 +14,9 @@ class TimeTableList
   include Enumerable
   include DataCheckingModule
   include ForWeekModule
-  include RetakeModule
   include LoadModule
+  include QuestionModule
+  include RetakeModule
 
   def initialize(timetable_list = [])
     @timetable_list = timetable_list.map do |item|
@@ -42,7 +44,7 @@ class TimeTableList
     hash
   end
 
-  def move?(params)
+  def move_audience?(params)
     data = data_by_day_of_week[params[:day]]
     data.each do |elem|
       return true if elem.day.eql?(params[:day]) &&
@@ -52,34 +54,22 @@ class TimeTableList
     false
   end
 
-  def question_days(param)
-    data = all_data
-    date_array = []
-    data.each do |day, pairs|
-      (1..6).each do |i|
-        if !pairs.key?(i)
-          date_array.append([day, i])
-          next
-        end
-        if !teacher_is_present(param['teacher'], pairs[i]) && !group_is_present(param['group'], pairs[i])
-          date_array.append([day, i])
-        end
-      end
-    end
-    date_array
-  end
+  def move_pair?(params, group)
+    data = all_data[params[:day]]
+    return false if !data.key?(params[:number_pair])
 
-  def teacher_is_present(teacher, items)
-    items.each do |item|
-      pp item
-      return true if item.teacher.eql?(teacher)
+    data[params[:number_pair]].each do |elem|
+      return true if elem.group.eql?(group)
     end
     false
   end
 
-  def group_is_present(group, items)
-    items.each do |item|
-      return true if item.group.eql?(group)
+  def move_subj?(params, subject)
+    data = all_data[params[:day]]
+    return false if !data.key?(params[:number_pair])
+
+    data[params[:number_pair]].each do |elem|
+      return true if elem.subject.eql?(subject)
     end
     false
   end
