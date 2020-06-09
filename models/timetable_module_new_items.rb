@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# module adding methods for checking input data. 1 and 3 tasks
+# module adding methods for checking input data. 1 task
 module DataCheckingModule
-  def new_group?(params)
+  def new_group(params)
     errors = []
     data = data_by_day_of_week[params[:day]]
     data.each do |elem|
@@ -13,7 +13,7 @@ module DataCheckingModule
     errors
   end
 
-  def new_teacher?(params)
+  def new_teacher(params)
     errors = []
     errors.concat(['Общее число предметов у преподавателя не должно превышать 8 штук']) if check_1(params)
     data = data_by_day_of_week[params[:day]]
@@ -28,7 +28,7 @@ module DataCheckingModule
     errors
   end
 
-  def new_audience?(params)
+  def new_audience(params)
     errors = []
     data = data_by_day_of_week[params[:day]]
     data.each do |elem|

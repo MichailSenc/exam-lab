@@ -20,24 +20,21 @@ class NewItemSchema < Dry::Validation::Contract
   end
 
   rule(:group, :day, :number_pair) do
-    errors = timetable_list.new_group?(values)
-    # pp errors
+    errors = timetable_list.new_group(values)
     errors.each do |error|
       key(:group).failure(error)
     end
   end
 
   rule(:teacher, :day, :number_pair, :subject, :audience) do
-    errors = timetable_list.new_teacher?(values)
-    # pp errors
+    errors = timetable_list.new_teacher(values)
     errors.each do |error|
       key(:teacher).failure(error)
     end
   end
 
   rule(:audience, :day, :number_pair, :subject) do
-    errors = timetable_list.new_audience?(values)
-    # pp errors
+    errors = timetable_list.new_audience(values)
     errors.each do |error|
       key(:audience).failure(error)
     end

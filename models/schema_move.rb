@@ -19,7 +19,6 @@ class MoveSchema < Dry::Validation::Contract
   end
 
   rule(:day, :number_pair, :audience, :group, :teacher) do
-    pp values
     if timetable_list.move_audience?(values)
       key(:audience).failure('Данная аудитория уже занята другим преподавателем.')
     end

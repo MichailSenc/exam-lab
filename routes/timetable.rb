@@ -8,7 +8,6 @@ class TimeTableApp
 
     r.is do
       @time_table_items = opts[:time_table_items].sorted_by_number_of_audience
-      pp @time_table_items
       view('timetable')
     end
 
@@ -117,7 +116,6 @@ class TimeTableApp
       r.post do
         @params = DryResultFormeAdapter.new(QuestionSchema.call(r.params))
         @question_days = opts[:time_table_items].question_days(r.params) if @params.success?
-        pp @question_days
         view('question')
       end
     end
