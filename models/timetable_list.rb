@@ -73,13 +73,13 @@ class TimeTableList
     @timetable_list[id]
   end
 
-  def add_item(_params)
+  def add_item(params)
     id = if @timetable_list.empty?
            1
          else
            @timetable_list.keys.max + 1
          end
-    @timetable_list[id] = TimeTable.new(id: id, **parameters.to_h)
+    @timetable_list[id] = TimeTable.new(id: id, **params.to_h)
     id
   end
 
